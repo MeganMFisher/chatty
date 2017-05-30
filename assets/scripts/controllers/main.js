@@ -2,17 +2,32 @@
 
 angular.module('chattyApp')
   .controller('MainCtrl', function ( $scope, messageService ) {
+
     messageService.getMessages().then(function ( response ) {
       $scope.messages = response.data.messages;
     });
 
-    $scope.addMessage = function ( message ) {
+    // $scope.addMessage = function ( message, name ) {
+    //   console.log(message)
+    //   console.log(name)
+    //   if (message) {
+    //     messageService.addMessage(message).then(function ( response ) {
+    //       $scope.messages = response.data.messages;
+    //     });
+    //   }
+    // };
+
+        $scope.addMessage = function ( message, username ) {
       if (message) {
-        messageService.addMessage(message).then(function ( response ) {
+        document.getElementById('form').reset()
+        messageService.addMessage(message, username).then(function ( response )
+         {
           $scope.messages = response.data.messages;
         });
       }
     };
+
+
 
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
